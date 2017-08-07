@@ -11,10 +11,12 @@
 			padding: 0;
 			background: url(minneapolis_crow.jpg) center center fixed;
 			background-size: cover;
+			user-select: none;
 		}
 
 		.keys {
 			display: flex;
+			flex-wrap: wrap;
 			align-items: center;
 			justify-content: center;
 			height: 100vh;
@@ -27,15 +29,19 @@
 
 				border: .4rem solid black;
   				border-radius: .5rem;
+				background: rgba(0, 0, 0, .4);
 
 				color: #fff;
 				font-size: 1.5rem;
 				text-align: center;
-				background: rgba(0, 0, 0, .4);
   				text-shadow: 0 0 .8rem #000;
+  				cursor: pointer;
+
+  				transition: all .08s ease;
 			}
 			.playing {
-				
+				transform: scale(1.1);
+  				border-color: #ffc600;
 			}
 				kdb {
 					font-size: 4rem;
@@ -43,41 +49,71 @@
 				.sound-title {
 					display: block;
 				}
-
 	</style>
 </head>
 <body>
 	<div class="keys"></div>
 
 	<script type="text/javascript">
-		const soundsMap = [
-			{'key': 'A', 'code': '65', 'sound': 'boom'},
-			{'key': 'S', 'code': '83', 'sound': 'clap'},
-			{'key': 'D', 'code': '68', 'sound': 'hihat'},
-			{'key': 'F', 'code': '70', 'sound': 'kick'},
-			{'key': 'J', 'code': '74', 'sound': 'openhat'},
-			{'key': 'K', 'code': '75', 'sound': 'ride'},
-			{'key': 'L', 'code': '76', 'sound': 'snare'},
-			{'key': ';', 'code': '186', 'sound': 'tom'}
-		];
+		const soundsMap = {
+			65: {'key': 'A', 'code': '65', 'sound': 'boom'},
+			83: {'key': 'S', 'code': '83', 'sound': 'clap'},
+			68: {'key': 'D', 'code': '68', 'sound': 'hihat'},
+			70: {'key': 'F', 'code': '70', 'sound': 'kick'},
+			74: {'key': 'J', 'code': '74', 'sound': 'openhat'},
+			75: {'key': 'K', 'code': '75', 'sound': 'ride'},
+			76: {'key': 'L', 'code': '76', 'sound': 'snare'},
+			186: {'key': ';', 'code': '186', 'sound': 'tom'}
+		};
 
-		
 		const keyTemplate = new DOMParser().parseFromString('<div class="key"><kdb></kdb><span class="sound-title"></span><audio></audio></div>', 'text/html').body.firstChild;
 		
-		let keysFragment = document.createDocumentFragment();
-		soundsMap.forEach(conf => {
-			let key = keyTemplate.cloneNode(true);
+		let keysFragment = document.createDocumentFragment(),
+			keyConf,
+			key;
 
-			key.setAttribute('data-key', conf.code);
-			key.querySelector('kdb').innerText = conf.key;
-			key.querySelector('.sound-title').innerText = conf.sound;
-			key.querySelector('audio').src = `sounds/${conf.sound}.wav`;
+		// build key nodes from config
+		for (let code in soundsMap) {
+			if (!soundsMap.hasOwnProperty(code))
+				continue;
 
+			keyConf = soundsMap[code];
+			key = keyTemplate.cloneNode(true);
+
+			// set button attributes
+			key.setAttribute('data-key', keyConf.code);
+			key.querySelector('kdb').innerText = keyConf.key;
+			key.querySelector('.sound-title').innerText = keyConf.sound;
+			key.querySelector('audio').src = `sounds/${keyConf.sound}.wav`;
+
+			// attach events
+			key.addEventListener('transitionend', e => {
+				if (e.propertyName == 'transform')
+					e.target.classList.remove('playing');
+			});
+			key.addEventListener('click', function(e){
+				playSound(this.getAttribute('data-key'));
+			});
+
+			// save node
+			keyConf.el = key;
+			keyConf.audio = key.querySelector('audio');
 			keysFragment.appendChild(key);
-		});
-
-		document.querySelector('.keys').appendChild(keysFragment);
+		};
 		
+
+		function playSound(code) {
+			if (!soundsMap.hasOwnProperty(code))
+				return;
+
+			const key = soundsMap[code];
+			key.el.classList.add('playing');
+			key.audio.currentTime = 0;
+			key.audio.play();
+		}
+
+		window.addEventListener('keydown', e => playSound(e.keyCode));
+		document.querySelector('.keys').appendChild(keysFragment);
 	</script>
 </body>
 </html>
