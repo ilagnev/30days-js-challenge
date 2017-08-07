@@ -3,27 +3,47 @@
 <head>
 	<title>drum kit</title>
 	<style type="text/css">
-
+		html {
+			font-size: 10px;
+		}
 		body {
 			margin: 0;
 			padding: 0;
 			background: url(minneapolis_crow.jpg) center center fixed;
 			background-size: cover;
-			font-size: 10px;
 		}
 
 		.keys {
-
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
 		}
+			
+			.key {
+				margin: 1rem;
+  				padding: 1rem;
+  				min-width: 8rem;
 
-		.key {
-			color: #fff;
-			width: 10rem;
-			font-size: 1.5rem;
-		}
-		.sound-title {
+				border: .4rem solid black;
+  				border-radius: .5rem;
 
-		}
+				color: #fff;
+				font-size: 1.5rem;
+				text-align: center;
+				background: rgba(0, 0, 0, .4);
+  				text-shadow: 0 0 .8rem #000;
+			}
+			.playing {
+				
+			}
+				kdb {
+					font-size: 4rem;
+				}
+				.sound-title {
+					display: block;
+				}
+
 	</style>
 </head>
 <body>
