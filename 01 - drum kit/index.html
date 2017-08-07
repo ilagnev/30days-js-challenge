@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>drum kit</title>
+	<style type="text/css">
+
+		body {
+			margin: 0;
+			padding: 0;
+			background: url(minneapolis_crow.jpg) center center fixed;
+			background-size: cover;
+			font-size: 10px;
+		}
+
+		.keys {
+
+		}
+
+		.key {
+			color: #fff;
+			width: 10rem;
+			font-size: 1.5rem;
+		}
+		.sound-title {
+
+		}
+	</style>
+</head>
+<body>
+	<div class="keys"></div>
+
+	<script type="text/javascript">
+		const soundsMap = [
+			{'key': 'A', 'code': '65', 'sound': 'boom'},
+			{'key': 'S', 'code': '83', 'sound': 'clap'},
+			{'key': 'D', 'code': '68', 'sound': 'hihat'},
+			{'key': 'F', 'code': '70', 'sound': 'kick'},
+			{'key': 'J', 'code': '74', 'sound': 'openhat'},
+			{'key': 'K', 'code': '75', 'sound': 'ride'},
+			{'key': 'L', 'code': '76', 'sound': 'snare'},
+			{'key': ';', 'code': '186', 'sound': 'tom'}
+		];
+
+		
+		const keyTemplate = new DOMParser().parseFromString('<div class="key"><kdb></kdb><span class="sound-title"></span><audio></audio></div>', 'text/html').body.firstChild;
+		
+		let keysFragment = document.createDocumentFragment();
+		soundsMap.forEach(conf => {
+			let key = keyTemplate.cloneNode(true);
+
+			key.setAttribute('data-key', conf.code);
+			key.querySelector('kdb').innerText = conf.key;
+			key.querySelector('.sound-title').innerText = conf.sound;
+			key.querySelector('audio').src = `sounds/${conf.sound}.wav`;
+
+			keysFragment.appendChild(key);
+		});
+
+		document.querySelector('.keys').appendChild(keysFragment);
+		
+	</script>
+</body>
+</html>
