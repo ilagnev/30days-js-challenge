@@ -14,6 +14,8 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            background: url(space.jpg) center center fixed;
+            background-size: cover;
         }
         .clock {
             width: 30rem;
@@ -21,13 +23,20 @@
             border: 2rem solid black;
             position: relative;
             border-radius: 50%;
+            box-shadow: 0 0 1.5rem rgba(0,0,0,1);
         }
             .hand {
                 position: absolute;
                 top: 50%;
-                width: 15rem;
+                margin-top: -.3rem;
                 height: .6rem;
+                width: 50%;
                 background: black;
+
+                transform-origin: 100%;
+                transform: rotate(90deg);
+                transition: all .22s;
+                transition-timing-function: cubic-bezier(0.16, 2.5, 0.5, 1);
             }
 	</style>
 </head>
