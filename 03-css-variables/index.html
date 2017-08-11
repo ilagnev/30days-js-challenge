@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Css variables</title>
+    <style type="text/css">
+        html {
+            font-size: 10px;
+        }
+        body {
+            font-size: 2.4rem;
+            color: white;
+            background-color: #193549;
+        }
+        #controls {
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Css variables update with <span class="highligt">javascript</span></h1>
+
+    <div id="controls">
+        <label for="spacing">Spacing:</label>
+        <input id="spacing" type="range" name="spacing" min="10" max="200" value="20" data-sizing="px">
+
+        <label for="blur">Blur:</label>
+        <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+        <label for="color">Base color:</label>
+        <input id="color" name="color" type="color" value="#fc0">
+    </div>
+
+    <img src="spaceship.jpg">
+
+</body>
+</html>
