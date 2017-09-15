@@ -4,8 +4,8 @@
 	<style type="text/css">
 		:root {
 			--spacing: 10px;
-			--blur: 8px;
-			--color: #cc8833;
+			--blur: 5px;
+			--color: #93b7d3;
 		}
 
 		body {
@@ -35,16 +35,29 @@
 
 	<div class="controls">
 		<label for="spacing">Spacing</label>
-		<input name="spacing" type="range" min="10" max="200" value="10" data-sizing="px">
+		<input name="spacing" type="range" min="0" max="50" value="10" data-sizing="px">
 
 		<label for="blur">Blur</label>
-		<input name="blur" type="range" min="0" max="25" value="8" data-sizing="px">
+		<input name="blur" type="range" min="0" max="20" value="5" data-sizing="px">
 
 		<label for="color">Color</label>
-		<input name="color" type="color" value="#dd6611" data-sizing="px">
+		<input name="color" type="color" value="#93b7d3">
 	</div>
 
 	<img src="cards-summer.jpg">
 
+	<script type="text/javascript">
+
+		const inputs = document.querySelectorAll('input');
+
+		inputs.forEach(input => input.addEventListener('change', valueUpdated));
+		inputs.forEach(input => input.addEventListener('mousemove', valueUpdated));
+
+		function valueUpdated (e) {
+			const suffix = this.dataset.sizing || '';
+			document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+		}
+
+	</script>
 </body>
 </html>
