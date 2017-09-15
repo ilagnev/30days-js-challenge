@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title>CSS Variables</title>
+	<style type="text/css">
+		:root {
+			--spacing: 10px;
+			--blur: 8px;
+			--color: #cc8833;
+		}
+
+		body {
+			text-align: center;
+			font-size: 30px;
+			font-family: 'helvetica neue', sans-serif;
+		}
+
+		.controls {
+			margin: 0 0 30px;
+		}
+
+		.colored {
+			color: var(--color);
+		}
+
+		img {
+			padding: var(--spacing);
+			background-color: var(--color);
+			filter: blur(var(--blur));
+		}
+	</style>
+</head>
+<body>
+
+	<h2>Use controls to change <span class="colored">image</span></h2>
+
+	<div class="controls">
+		<label for="spacing">Spacing</label>
+		<input name="spacing" type="range" min="10" max="200" value="10" data-sizing="px">
+
+		<label for="blur">Blur</label>
+		<input name="blur" type="range" min="0" max="25" value="8" data-sizing="px">
+
+		<label for="color">Color</label>
+		<input name="color" type="color" value="#dd6611" data-sizing="px">
+	</div>
+
+	<img src="cards-summer.jpg">
+
+</body>
+</html>
