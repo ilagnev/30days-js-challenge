@@ -26,7 +26,7 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
     const fifteens = inventors.filter(inv => inv.year > 1499 && inv.year < 1600);
-    console.log(fifteens);
+    console.table(fifteens);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
@@ -36,7 +36,7 @@
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
     const inventorsSorted = inventors.sort((f, s) => f.year > s.year ? 1 : -1);
-    console.log(inventorsSorted);
+    console.table(inventorsSorted);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
@@ -45,11 +45,11 @@
 
     // 5. Sort the inventors by years lived
     const inventorsYearsLived = inventors.sort((f, s) => (f.passed - f.year) > (s.passed - s.year) ? 1 : -1);
-    console.log(inventorsYearsLived);
+    console.table(inventorsYearsLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-    // Array.prototype.filter.call(document.querySelectorAll('.mw-category li a'), a => a.text.indexOf(' de ') > -1).map(a => a.text)
+    // Array.from(document.querySelectorAll('.mw-category li a')).filter(a => a.text.indexOf(' de ') > -1).map(a => a.text)
     const boulevards = ["Boulevard de l'Amiral-Bruix", "Boulevard de la Chapelle", "Boulevard de Clichy", "Boulevard de l'Hôpital", "Boulevard de la Madeleine", "Boulevard de Magenta", "Boulevard de Rochechouart", "Boulevard de Sébastopol", "Boulevard de Strasbourg", "Boulevard de la Zone"];
 
 
@@ -62,11 +62,9 @@
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
     const calculatedVehicles = data.reduce((acc, cur) => {
-    	if (acc[cur]) {
-    		acc[cur]++;
-    	} else {
-    		acc[cur] = 1;
-    	}
+    	if (!acc[cur])
+    		acc[cur] = 0;
+		acc[cur]++;
     	return acc;
     }, {});
     console.log(calculatedVehicles);
