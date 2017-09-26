@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>City or state filter</title>
+    <style type="text/css">
+        html {
+            font-size: 20px;
+            margin: 0;
+        }
+        body {
+            font-family: 'helvetica neue';
+            background-color: #F7CBF7;
+            color: black;
+        }
+        .search-form {
+            margin: 50px auto 0;
+            max-width: 400px;
+            text-align: center;
+        }
+            .search-form .search {
+                padding: 10px;
+                font-size: 40px;
+                text-align: center;
+                border: 10px solid #f7f7f7;
+                outline: 0;
+                box-sizing: border-box;
+                width: 100%;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.12), 
+                            inset 0 0 2px rgba(0, 0, 0, 0.19);
+            }
+            .search-form .search:focus {
+                border-color: #E2EEF8;
+            }
+        
+            .suggestions {
+                margin: 20px 0;
+                padding: 0;
+            }
+                .suggestions li {
+                    list-style: none;
+                    padding: 20px;
+                    background: white;
+                    border: 1px solid gray;
+
+                }
+                .suggestions li:nth-child(even) {
+                    transform: perspective(100px) rotateX(3deg) translateY(-1px);
+                    background: linear-gradient(to bottom,  #ffffff 0%,#f7f7f7 100%);
+                }
+                .suggestions li:nth-child(odd) {
+                    transform: perspective(100px) rotateX(-3deg);
+                    background: linear-gradient(to top,  #ffffff 0%,#f7f7f7 100%);
+                }
+    </style>
+</head>
+<body>
+    <form class="search-form">
+        <input type="text" class="search" name="search" placeholder="type city or state">
+        <ul class="suggestions">
+            <li>City 1</li>
+            <li>City 2</li>
+            <li>City 3</li>
+            <li>City 4</li>
+        </ul>
+    </form>
+
+    <script type="text/javascript">
+        const cityList = "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+
+    </script>
+</body>
+</html>
