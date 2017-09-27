@@ -1,0 +1,106 @@
+<html>
+<head>
+	<title>Flex gallery</title>
+	<style type="text/css">
+		html {
+			font-size: 10px;
+			font-family: 'helvetica neue', sans-serif;
+			box-sizing: border-box;
+		}
+		body {
+			margin: 0;
+		}
+		.first {background-image: url(01.jpg);}
+		.second {background-image: url(02.jpg);}
+		.third {background-image: url(03.jpg);}
+		.fourth {background-image: url(04.jpg);}
+		.fifth {background-image: url(05.jpg);}
+		
+		.panels {
+			min-height: 100vh;
+			overflow: hidden;
+			display: flex;
+		}
+		.panel {
+			font-size: 2rem;
+			color: white;
+			text-shadow:0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+			/*text-align: center;*/
+			
+			background-size: cover;
+			background-position: center;
+			
+			flex: 1;
+			/*justify-content: center;*/
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+
+		    transition:
+		        font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+		        flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11);
+		}
+		.panel.opened {
+			flex: 5;
+			font-size: 4rem;
+		}
+			.panel > * {
+				margin: 0;
+				width: 100%;
+				/*border: 1px solid blue;*/
+				flex: 1 0 auto;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				transition: transform 0.8s;
+			}
+			.panel > *:first-child { transform: translateY(-100%); }
+			.panel > *:last-child { transform: translateY(100%); }
+			.panel > *:nth-child(2) { font-size: 3rem;}
+
+			/*.panel.opened > * { font-size: 4rem; }*/
+			.panel.opened > *:first-child { transform: translateY(0); }
+			.panel.opened > *:last-child { transform: translateY(0); }
+
+	</style>
+</head>
+<body>
+
+	<div class="panels">
+
+		<div class="panel first">
+			<p>Do</p>
+			<p>Amazing</p>
+			<p>Things</p>
+		</div>
+
+		<div class="panel second">
+			<p>Believe</p>
+			<p>In</p>
+			<p>Yourself</p>
+		</div>
+
+		<div class="panel third">
+			<p>Make</p>
+			<p>Life</p>
+			<p>Epic</p>
+		</div>
+
+		<div class="panel fourth">
+			<p>Clear</p>
+			<p>Your</p>
+			<p>Head</p>
+		</div>
+
+		<div class="panel fifth">
+			<p>Now</p>
+			<p>Or</p>
+			<p>Never</p>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
