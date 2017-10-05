@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>canvas fun</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+                margin: 0;
+            }
+            #canvas {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+        <script type="text/javascript">
+            // get element and set size
+            const canvas = document.querySelector('#canvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // get canvas context
+            const ctx = canvas.getContext('2d');
+
+            // show title
+            ctx.font="50px Verdana";
+            ctx.fillStyle = "#cc55aa";
+            ctx.textAlign = 'center';
+            ctx.fillText("Fun Paint Page 😜", canvas.width / 2, 50);
+
+            // set default drawing styles
+            ctx.strokeStyle = "#FF0000";
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            ctx.lineWidth = 22;
+            
+            let isDrawing = false,
+                prevX = 0, 
+                prevY = 0,
+                hue = 0,
+                lineModifier = 2;
+
+            // draw line each time mouse move
+            function draw(e) {
+                if (!isDrawing) return;
+                // console.log(e);
+
+                // draw line
+                ctx.beginPath();
+                ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+                ctx.lineWidth += lineModifier;
+                ctx.moveTo(prevX, prevY);
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+
+                // update previous position
+                [prevX, prevY] = [e.offsetX, e.offsetY];
+                hue++;
+
+                if (ctx.lineWidth > 88 || ctx.lineWidth < 8)
+                    lineModifier *= -1;
+            }
+
+            // attach mouse events
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mousedown', (e) => {
+                isDrawing = true;
+                // set line start position
+                [prevX, prevY] = [e.offsetX, e.offsetY];
+            })
+            canvas.addEventListener('mouseup', () => isDrawing = false)
+            canvas.addEventListener('mouseout', () => isDrawing = false)
+        </script>
+    </body>
+</html>
