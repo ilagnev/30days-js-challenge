@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Console methods</title>
+</head>
+<body>
+    
+    <script>
+        const dogs = [{name: 'korky', age: 3}, {name: 'doge', age: 5}];
+        
+        // regular
+        console.log('i am log entry');
+
+        // interpolated
+        console.log('emoji string %s', '💩')
+
+        // styled
+        const style = 'font-size: 25px; color:white; background: linear-gradient(#1e5799, #2989d8, #d6e22b, #7823ba);'
+        console.log('%cstyled text', style);
+
+        // warning
+        console.warn('warning, you are near the edge');
+
+        // error
+        console.error('Shit!');
+
+        // info, in chrome have not icon lol :)
+        const dayOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+        console.info('Be aware today is %c%s', 'font-weight:bold', dayOfWeek[new Date().getDay() - 1]);
+
+        // testing
+        console.assert(document.body.classList.contains('tatoo'), 'wow, its clean body');
+
+        // view dom elements
+        console.log(document.body);
+        console.dir(document.body);
+
+        // grouping
+        dogs.forEach(dog => {
+            console.groupCollapsed(dog.name);
+            console.log('name is: %c%s', 'font-weight:bold', dog.name);
+            console.log('age is: %c%s', 'font-weight:bold', dog.age);
+            console.groupEnd();
+        });
+
+        // counting
+        console.count('first');
+        console.count('second');
+        console.count('second');
+        console.count('second');
+        console.count('first');
+
+        // timing
+        console.time('rand timer');
+        setTimeout(() => {
+            console.timeEnd('rand timer');
+        }, 2000 * Math.random());
+    </script>
+</body>
+</html>
