@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select multiple checkboxes with shift</title>
+    <style>
+        html {
+            font-size: 20px;
+            font-family: Trebuchet, sans-serif;
+            font-weight: 100;
+        }
+        body {
+            background-color: #f5f8fa;
+        }
+        .list {
+            margin: 50px auto;
+            padding: 0;
+            list-style: none;
+            width: 400px;
+            box-shadow: 10px 10px rgba(0, 0, 0, .3);
+            border: 1px solid rgba(0, 0, 0, .3);
+            user-select: none;
+        }
+            .list li {
+                display: flex;
+                align-items: center;
+                background-color: white;
+                border-bottom: 1px solid #ccc;
+            }
+                .list input {
+                    margin: 20px;
+                    flex-shrink: 0;
+                }
+                .list input:checked + p {
+                    background-color: #3097D1;
+                    color: white;
+                }
+                .list p {
+                    margin: 0;
+                    padding: 20px;
+                    width: 100%;
+                    border-left: 1px solid gray;
+                }
+    </style>
+</head>
+<body>
+    <ul class="list">
+        <li>
+            <input type="checkbox">
+            <p>The Shawshank Redemption</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>The Godfather</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>The Godfather: Part II</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>The Dark Knight</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>12 Angry Men</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>Schindler's List</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>Pulp Fiction</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>The Lord of the Rings: The Return of the King</p>
+        </li>
+    </ul>
+    <script>
+        const list = document.querySelectorAll('li');
+        let lastCheckedInput;
+        list.forEach(item => item.addEventListener('click', check));
+        function check(e) {
+            const input = this.querySelector('input');
+            input.checked = !input.checked;
+
+            if (
+                e.shiftKey 
+                && lastCheckedInput && lastCheckedInput != input
+                && input.checked && lastCheckedInput.checked
+            ) {
+                let inRange = false;
+                const checkboxes = document.querySelectorAll('.list input');
+                checkboxes.forEach(checkbox => {
+                    if (checkbox == input || checkbox == lastCheckedInput) inRange = !inRange;
+                    if (inRange) checkbox.checked = true;
+                });
+            }
+
+            lastCheckedInput = input;;
+        }
+    </script>
+</body>
+</html>
