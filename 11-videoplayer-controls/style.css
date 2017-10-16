@@ -6,10 +6,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(to bottom right, red 0%, blue 100%);
 }
 .player {
     max-width: 750px;
-    /* margin: 0 auto; */
     position: relative;
     overflow: hidden;
 }
@@ -66,8 +66,7 @@ body {
         }
             .progress-filled {
                 background-color: #ffc600;
-                width: 50%;
-                flex: 0 0 50%;
+                flex: 0 0 0;
             }
 /* unholy css to style input type="range" */
 
