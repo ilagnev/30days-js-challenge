@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Konami code</title>
+        <meta charset="UTF-8">
+        <style>
+            body {
+                margin: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                font-size: 20px;
+                font-family: "Trebuchet MS", Trebuchet, sans-serif;
+                font-weight: bold;
+            }
+            input {
+                margin-top: 50px;
+                font-size: 40px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Try to type:</h1>
+        <h2>up up down down left right left right A B</h2>
+        <input type="text" disabled="disabled">
+        <script>
+            //const secretCode = ['ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightab'];
+            const secretCode = [38, 38, 40, 40, 37, 39, 37, 39, 65, 66];
+            const currentCode = [];
+            const display = document.querySelector('input');
+
+            document.addEventListener('keyup', keyPressed);
+            function keyPressed(e) {
+                //console.log(e.keyCode);
+                currentCode.push(e.keyCode);
+                display.value = e.key;
+                currentCode.splice(-secretCode.length - 1, currentCode.length - secretCode.length);
+                if (currentCode.toString() == secretCode.toString()) {
+                    randomBackground();
+                }
+            }
+
+            function randomBackground() {
+                document.body.style.color = randomColor();
+                document.body.style.background = Math.random() > .5
+                    ? `radial-gradient(${randomColor()}, ${randomColor()})`
+                    : `linear-gradient(to right bottom, ${randomColor()}, ${randomColor()})`;
+            }
+            function randomColor(){
+                return '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+            }
+        </script>
+    </body>
+</html>
