@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Slidein effect due scroll</title>
+        <meta charset="UTF-8">
+        <style>
+            body {
+                margin: 0;
+                box-sizing: border-box;
+                font-size: 20px;
+                font-family: Trebuchet, sans-serif;
+                background: linear-gradient(to bottom right, #B4185B 0%, #451EC5 66%, #6020ae 100%);
+            }
+            
+            article {
+                max-width: 700px;
+                margin: 30px auto;
+                padding: 50px;
+                background-color: white;
+                border: 1px solid rgba(0, 0, 0, .4);
+                overflow: hidden;
+            }
+                .align-right {
+                    float: right;
+                    margin-left: 10px;
+                    }
+                    .align-right.slide-in {transform: translateX(30%) scale(.9);}
+                .align-left {
+                    float: left;
+                    margin-right: 10px;
+                    }
+                    .align-left.slide-in {transform: translateX(-30%) scale(.9);}
+                
+                .slide-in {
+                    opacity: 0;
+                    transition: all .3s;
+                }
+                .slide-in.active {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+        </style>
+    </head>
+    <body>
+        <article>
+            <h2>Some article</h2>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam facilis possimus neque dolorem ad iste accusantium deserunt non consequatur enim voluptates maiores atque, necessitatibus dolorum delectus velit iure reiciendis mollitia.</p>
+            <img src="https://picsum.photos/300/200" class="slide-in align-right">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea sunt laboriosam hic ipsam, illum quam voluptates molestias commodi voluptatem enim maiores nobis quidem magnam aliquam officia perspiciatis impedit. Itaque.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea sunt laboriosam hic ipsam, illum quam voluptates molestias commodi voluptatem enim maiores nobis quidem magnam aliquam officia perspiciatis impedit. Itaque.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea sunt laboriosam hic ipsam, illum quam voluptates molestias commodi voluptatem enim maiores nobis quidem magnam aliquam officia perspiciatis impedit. Itaque.</p>
+            <img src="https://picsum.photos/200/400" class="slide-in align-left">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea sunt laboriosam hic ipsam, illum quam voluptates molestias commodi voluptatem enim maiores nobis quidem magnam aliquam officia perspiciatis impedit. Itaque.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea sunt laboriosam hic ipsam, illum quam voluptates molestias commodi voluptatem enim maiores nobis quidem magnam aliquam officia perspiciatis impedit. Itaque.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea sunt laboriosam hic ipsam, illum quam voluptates molestias commodi voluptatem enim maiores nobis quidem magnam aliquam officia perspiciatis impedit. Itaque.</p>
+            <img src="https://picsum.photos/300/300" class="slide-in align-right">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea sunt laboriosam hic ipsam, illum quam voluptates molestias commodi voluptatem enim maiores nobis quidem magnam aliquam officia perspiciatis impedit. Itaque.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea sunt laboriosam hic ipsam, illum quam voluptates molestias commodi voluptatem enim maiores nobis quidem magnam aliquam officia perspiciatis impedit. Itaque.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea sunt laboriosam hic ipsam, illum quam voluptates molestias commodi voluptatem enim maiores nobis quidem magnam aliquam officia perspiciatis impedit. Itaque.</p>
+            <img src="https://picsum.photos/400/350" class="slide-in align-right">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea sunt laboriosam hic ipsam, illum quam voluptates molestias commodi voluptatem enim maiores nobis quidem magnam aliquam officia perspiciatis impedit. Itaque.</p>
+        </article>
+        <script>
+            function debounce(fn, timeout = 20) {
+                let t;
+                return function() {
+                    clearTimeout(t);
+                    t = setTimeout(() => fn.apply(this, arguments), timeout);
+                }
+            }
+
+            const images = document.querySelectorAll('.slide-in');
+            function slideInOut(e) {
+                images.forEach((img) => {
+                    const bottomScreenEdge = window.scrollY + window.innerHeight;
+                    const topScreenEdge = window.scrollY;
+                    // check if image position between top and bottom of screen
+                    // then add class .active
+                    if (bottomScreenEdge > img.offsetTop && topScreenEdge < img.offsetTop + img.height) {
+                        img.classList.add('active');
+                    } 
+                    // otherwise remove class .active
+                    else {
+                        img.classList.remove('active');
+                    }
+                });
+            }
+
+            document.addEventListener('scroll', debounce(slideInOut));
+        </script>
+    </body>
+</html>
