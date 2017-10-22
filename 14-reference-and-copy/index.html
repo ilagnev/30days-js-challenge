@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>copy or reference</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h2>look to the console</h2>
+        <script>
+            const players = ['joe', 'tom', 'eddy', 'bob'];
+
+            // refference
+            const team = players;
+            team[4] = 'fred';
+            console.log('refference\n', players, team);
+            players[4] = 'bob';
+
+            // copy 1
+            const team1 = players.slice();
+            team1[4] = 'fred';
+            console.log('slice\n', players, team1);
+
+            // copy 2
+            const team2 = [].concat(players);
+            team2[4] = 'fred';
+            console.log('concat\n', players, team2);
+
+            // copy 3
+            const team3 = [...players];
+            team3[4] = 'fred';
+            console.log('spread\n', players, team3);
+
+            // copy 4
+            const team4 = Array.from(players);
+            team4[4] = 'fred';
+            console.log('array.from\n', players, team4);
+            console.log('');
+            
+            // object copy
+            
+            var object = {
+                name: 'tom quckly',
+                age: 38
+            };
+
+            // refference
+            const inst = object;
+            inst.number = 88;
+            console.log('refference\n', object, inst);
+            delete inst.number;
+
+            // copy 1
+            const inst1 = Object.assign({}, object, {number: 77});
+            console.log('object.assign\n', object, inst1);
+
+            // copy 2
+            const inst2 = {...object};
+            inst2.number = 66;
+            console.log('spread\n', object, inst2);
+            console.log('');
+
+            // deep object copy
+            
+            const deep = {
+                name: 'don',
+                age: 33,
+                social: {
+                    twitter: '@don'
+                }
+            };
+            const deepCopy = JSON.parse(JSON.stringify(deep));
+            deepCopy.social.twitter = '@real-don';
+            
+            console.log('deep copy\n', deep, deepCopy);
+            
+        </script>
+    </body>
+</html>
