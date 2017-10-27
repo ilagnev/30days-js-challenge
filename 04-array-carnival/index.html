@@ -64,7 +64,8 @@
     const calculatedVehicles = data.reduce((acc, cur) => {
     	if (!acc[cur])
     		acc[cur] = 0;
-		acc[cur]++;
+      
+		  acc[cur]++;
     	return acc;
     }, {});
     console.log(calculatedVehicles);
