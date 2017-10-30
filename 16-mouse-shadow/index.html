@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>text shadow moving with mouse</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                margin: 0;
+            }
+            h2 {
+                font-size: 70px;
+                font-family: "Trebuchet MS", Trebuchet, sans-serif;
+                text-transform: capitalize;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <h2>👾 be aware</h2>
+
+        <script>
+            const container = document.querySelector('body');
+            const el = document.querySelector('h2');
+            const shadowLength = 30;
+
+            // use bouncer
+            function debounce(fn, ms = 5) {
+                let t;
+                return function() {
+                    clearTimeout(t);
+                    t = setTimeout(() => fn.apply(this, arguments), ms);
+                }
+            }
+
+            container.addEventListener('mousemove', debounce(moving));
+            function moving(e) {
+                // set mouse offset in current element
+                let {offsetX: x, offsetY: y} = e;
+
+                // fix mouse offset if in children
+                if (this !== e.target) {
+                    x += e.target.offsetLeft;
+                    y += e.target.offsetTop;
+                }
+
+                const xShadowOffset = (x / container.offsetWidth * shadowLength) - (shadowLength / 2);
+                const yShadowOffset = (y / container.offsetHeight * shadowLength) - (shadowLength / 2);
+
+                // console.log(x, y);
+                el.style.textShadow = `
+                    ${xShadowOffset}px ${yShadowOffset}px 5px rgba(0,255,255,.5),
+                    ${xShadowOffset * 1.3}px ${yShadowOffset * 1.2}px 10px rgba(255,0,255,.5),
+                    ${xShadowOffset * 1.6}px ${yShadowOffset * 1.4}px 15px rgba(255,0,255,.5)
+                `;
+            }
+        </script>
+    </body>
+</html>
