@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>sorting without articles</title>
+        <meta charset="UTF-8">
+        <style>
+            body {
+                margin: 0;
+                background: url(cinema.jpg) center center;
+                background-size: cover;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            ul {
+                margin: 0;
+                padding: 0;
+                box-shadow: 0 0 0 10px rgba(0, 0, 0, .4);
+            }
+            li {
+                padding: 15px;
+                background: white;
+                border: 1px solid #ccc;
+                list-style-position: inside;
+                list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA1klEQVQ4T6XTvU5CMRgG4AeiYWNh0BsAEmPiyOIVMBnFhJWZwRvwApTJjZWVBK+BMDA4Gnfj6OjuHympy7GHw8np2vZpv7dfayqOWsX9ygAdjHCPj7+DdwFNHOEODUywisgsBRziHM94xBlO8BaBLm6wwDIFnOIlLmpjjD5aeMUTfrKZZUtYR33KNp/3nJC/8RvmskC43tUeL3MdS0kCx3jIQeqYYyfwhWEOcIDPIqAXA0sZoeTLIqByBvsAg9gr/0IMtV8UvELI6DY2WKm/kHTLfKYksAFLLicRgtM+mgAAAABJRU5ErkJggg==);
+            }
+        </style>
+    </head>
+    <body>
+
+        <ul id="list">
+            <li>ss</li>
+        </ul>
+
+        <script>
+            const films = [
+                "The Shawshank Redemption (1994)", 
+                "The Godfather (1972)", 
+                "The Godfather: Part II (1974)", 
+                "The Dark Knight (2008)", "Angry Men (1957)", 
+                "Schindler's List (1993)", 
+                "Pulp Fiction (1994)", 
+                "The Lord of the Rings: The Return of the King (2003)", 
+                "The Good, the Bad and the Ugly (1966)", 
+                "Fight Club (1999)"
+            ];
+            const list = document.querySelector('#list');
+
+            String.prototype.atrim = function(){return this.replace(/(a |the | an)/i, '')};
+
+            list.innerHTML = films
+                .sort((f, s) => f.atrim() > s.atrim() ? 1 : -1)
+                .map(f => `<li>${f}</li>`)
+                .join('')
+
+        </script>
+    </body>
+</html>
