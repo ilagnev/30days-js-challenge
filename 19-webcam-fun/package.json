@@ -2,7 +2,7 @@
   "scripts": {
     "start": "browser-sync start --server --files '*.css, *.js, *.html'"
   },
-  "dependencies": {
+  "devDependencies": {
     "browser-sync": "^2.18.13"
   }
 }

@@ -24,7 +24,7 @@ function getVideo(cb) {
             video.src = window.URL.createObjectURL(stream);
             return video.play()
         })
-        .catch(err => console.error('no camera allowed?', err));
+        .catch(err => alert('no camera allowed or not https host?', err));
 }
 
 let filterName;
