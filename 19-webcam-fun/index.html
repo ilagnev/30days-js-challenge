@@ -6,32 +6,50 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="photobooth">
-        <div class="controls">
-            <div class="rgb">
-                <div>
-                    <label>Red Min: <input type="range" min=0 max=255 name="rmin"></label>
-                    <label>Red Max: <input type="range" min=0 max=255 name="rmax"></label>
-                </div>
-                <div>
-                    <label>Green Min: <input type="range" min=0 max=255 name="gmin"></label>
-                    <label>Green Max: <input type="range" min=0 max=255 name="gmax"></label>
-                </div>
-                <div>
-                    <label for="bmin">Blue Min: <input type="range" min=0 max=255 name="bmin"></label>
-                    <label for="bmax">Blue Max: <input type="range" min=0 max=255 name="bmax"></label>
-                </div>
-            </div>
-            <button class="snap-button" onClick="takePhoto()">Take Photo</button>
-        </div>
-        
-        <canvas class="photo"></canvas>
+
+    <div class="controls">
         <video class="player"></video>
-        <div class="strip"></div>
+
+        <fieldset>
+            <label><input type="radio" name="filter" checked value="noEffect"> No effects</label>
+        </fieldset>
+
+        <fieldset>
+            <label><input type="radio" name="filter" value="redEffect"> Red effect</label>
+        </fieldset>
+        
+        <fieldset>
+            <label><input type="radio" name="filter" value="rgbSplit"> Rgb split</label>
+        </fieldset>
+        </fieldset>
+        
+        <fieldset>
+            <label><input type="radio" name="filter" value="highEffect"> High effect</label>
+        </fieldset>
+
+        <fieldset>
+            <label><input type="radio" name="filter" value="greenScreen"> Green screen</label>
+            <div class="rgb">
+                <label>Red Min: <input type="range" min=0 max=255 name="rmin"></label>
+                <label>Red Max: <input type="range" min=0 max=255 name="rmax"></label>
+                <label>Green Min: <input type="range" min=0 max=255 name="gmin"></label>
+                <label>Green Max: <input type="range" min=0 max=255 name="gmax"></label>
+                <label>Blue Min: <input type="range" min=0 max=255 name="bmin"></label>
+                <label>Blue Max: <input type="range" min=0 max=255 name="bmax"></label>
+            </div>
+        </fieldset>
+    </div>
+    
+    <canvas class="screen"></canvas>
+    
+    <div class="strip">
+        <button class="snap-button" onClick="takePhoto()">Take Photo</button>
+        <div class="scroll-container">
+            <div class="photos"></div>
+        </div>
     </div>
     
     <audio class="snap" src="http://wesbos.com/demos/photobooth/snap.mp3" hidden></audio>
-    
     <script src="main.js"></script>
 </body>
 </html>
