@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Speach recognition</title>
+        <meta charset="UTF-8">
+        <style>
+            html {
+                font-size: 10px;
+                font-weight: 300;
+                font-family: 'helvetica neue', helvetica, "Trebuchet MS", Trebuchet, sans-serif;
+                margin: 0;
+                padding: 0;
+                /* nightwalk */
+                background: linear-gradient(to right, #2980b9, #2c3e50);
+                min-height: 100vh;
+            }
+            body {margin: 0;}
+            .words {
+                max-width: 500px;
+                margin: 50px auto;
+                padding: 1rem 3rem 1rem 5rem;
+                position: relative;
+                
+                font-size: 2.4rem;
+                line-height: 3rem;
+                background: linear-gradient(to bottom, #d9eaf3, white 4%) 0 4px;
+                background-size: 100% 3rem;
+                border-radius: 5px;
+                box-shadow: 10px 10px 0 rgba(0, 0, 0, .1);
+            }
+            .words::before {
+                content: '';
+                width: .5rem;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 3rem;
+                border: 1px solid;
+                border-color: transparent #f0dddd;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="words">
+            conscious styling is important
+        </div>
+    </body>
+</html>
