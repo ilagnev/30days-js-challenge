@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "browser-sync start --directory --server --files '*.css, *.html, *.js' --https",
+    "start-http": "browser-sync start --directory --server --files '*.css, *.html, *.js'"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.13"
+  }
+}
