@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Speach recognition</title>
+        <title>Speech recognition</title>
         <meta charset="UTF-8">
         <style>
             html {
@@ -23,7 +23,7 @@
                 
                 font-size: 2.4rem;
                 line-height: 3rem;
-                background: linear-gradient(to bottom, #d9eaf3, white 4%) 0 4px;
+                background: linear-gradient(to bottom, #d9eaf3, white 4%) 0 6px;
                 background-size: 100% 3rem;
                 border-radius: 5px;
                 box-shadow: 10px 10px 0 rgba(0, 0, 0, .1);
@@ -38,11 +38,94 @@
                 border: 1px solid;
                 border-color: transparent #f0dddd;
             }
+                .words p {
+                    margin: 3rem 0;
+                }
         </style>
     </head>
     <body>
         <div class="words">
-            conscious styling is important
+            talk to me human 🤖 [try to say unicorn or dog]
         </div>
+        <script>
+            function recognize() {
+                window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                const recognition = new SpeechRecognition();
+                
+                let autoStart = true;
+                recognition.interimResults = true;
+                // recognition.continuous = true;
+                
+                let p;
+                const container = document.querySelector('.words');
+
+                // on recognition start create new p element where results will be placed
+                recognition.addEventListener('start', e => {
+                    p = document.createElement('p');
+                    container.appendChild(p);
+                });
+
+                // each time when api push results 
+                // we collect strings and put them to container
+                recognition.addEventListener('result', e => {
+                    const transcript = [...e.results]
+                        .map(res => res[0].transcript)
+                        .join('')
+
+                    console.log(transcript);
+                    // replace strings markers
+                    p.textContent = replacePatterns(transcript);
+                    
+                    // if transcription not empty scroll to bottom to see text
+                    if (p.textContent.length > 0) {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    }
+                });
+
+                // if nothing was spoke - delete current p element
+                // and start new recognition
+                recognition.addEventListener('end', e => {
+                    if (p && p.textContent.length === 0) {
+                        container.removeChild(p);
+                    }
+
+                    console.log('ended', e);
+                    autoStart && recognition.start();
+                });
+
+                recognition.addEventListener('error', err => {
+                    console.error('error occured', err);
+                    if (err.error == "not-allowed") {
+                        autoStart = false;
+                        
+                        const ep = document.createElement('p');
+                        ep.style = `color:red; font-weight:bold;`;
+                        ep.textContent = 'mic not allowed, cant hear you 😿';
+                        container.appendChild(ep);
+                        
+                        recognition.stop();
+                    }
+                });
+
+                // start recognition
+                recognition.start();
+            }
+
+            // some fun, replace text with emoji
+            function replacePatterns(text) {
+                if (text.toUpperCase().includes('UNICORN')) {
+                    text = text.replace(/unicorn/gi, "🦄");
+                }
+                if (text.toUpperCase().includes('DOG')) {
+                    text = text.replace(/dog/gi, "🐶");
+                }
+                if (text.toUpperCase().includes('POOP')) {
+                    text = text.replace(/poop|shit/gi, "💩");
+                }
+                return text;
+            }
+
+            document.addEventListener('DOMContentLoaded', recognize);
+        </script>
     </body>
 </html>
