@@ -33,7 +33,21 @@ ul.menu {
 
     list-style: none;
 }
+a {
+    text-decoration: none;
+    color: rgb(29, 29, 158);
+}
 
 article {
     max-width: 50%;
+}
+
+.highlight {
+    transition: all .2s;
+    background: white;
+    z-index: -1;
+    position: absolute;
+    border-radius: 20px;
+    top: 0;
+    left: 0;
 }

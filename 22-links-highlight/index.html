@@ -26,7 +26,25 @@
         </article>
 
         <script>
-            console.log('lets start');
+            // create highlight element
+            const high = document.createElement('span');
+            high.classList.add('highlight');
+            document.body.appendChild(high);
+
+            // select all links to be highlighted
+            const links = document.querySelectorAll('a');
+
+            links.forEach((el) => el.addEventListener('mouseenter', highlight));
+            function highlight(e) {
+                // get link coordinates
+                const coords = this.getBoundingClientRect();
+
+                // apply current element sizes and offsets to high element
+                high.style.width = `${coords.width}px`;
+                high.style.height = `${coords.height}px`;
+                high.style.transform = `translate(${coords.left + window.scrollX}px, ${coords.top + window.scrollY}px)`;
+            }
+
         </script>
     </body>
 </html>
