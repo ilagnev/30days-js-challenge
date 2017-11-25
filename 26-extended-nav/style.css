@@ -39,6 +39,7 @@ nav {
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
     nav li.logo {
         background: white;
@@ -55,6 +56,70 @@ nav {
     nav li.logo a {
         color: black;
     }
+
+    .dropdownBackground {
+        width: 100px;
+        height: 100px;
+        border-radius: 5px;
+        background: white;
+        box-shadow: 0 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);
+        position: absolute;
+        opacity: 0;
+        display: flex;
+        justify-content: center;
+        transform-origin: 50% 0;
+        transform: translate(10px, 10px);
+        transition: all .5s, opacity .1s, translate .2s;
+    }
+    .dropdownBackground.open {
+        opacity: 1;
+    }
+        .dropdownBackground .arrow {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            transform: translateY(-50%) rotate(45deg);
+            display: block;
+            background: white;
+        }
+
+    nav .dropdown {
+        display: none;
+        opacity: 0;
+        position: absolute;
+        overflow: hidden;
+        padding: 20px;
+        top: 60px;
+        transition: all .5s;
+        will-change: opacity;
+    }
+    nav .trigger-enter .dropdown {
+        display: block;
+    }
+    nav .trigger-enter-active .dropdown {
+        opacity: 1;
+    }
+        nav .dropdown a {
+            color: black;
+        }
+
+        .dropdown.about {
+            width: 400px;
+        }
+            .dropdown.about h3 {
+                text-align: center;
+            }
+            .dropdown.about .photo {
+                font-size: 80px;
+                line-height: 80px;
+                margin: 15px;
+                float: left;
+            }
+        .dropdown.images {
+            font-size: 80px;
+            line-height: 80px;
+            padding: 40px;
+        }
 
 article {
     max-width: 60%;

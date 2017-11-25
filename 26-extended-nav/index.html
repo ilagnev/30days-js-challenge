@@ -11,12 +11,40 @@
         </header>
         
         <nav>
+            <div class="dropdownBackground">
+                <span class="arrow"></span>
+            </div>
             <ul>
                 <li class="logo"><a href="">Lost&nbsp;🤷‍♂</a></li>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Images</a></li>
-                <li><a href="#">Locations</a></li>
+                <li>
+                    <a href="#">About</a>
+                    <div class="dropdown about">
+                        <h3>Hi there! My name is Nick</h3>
+                        <span class="photo">👨‍💻</span>
+                        <p>I work with computers and make awesome web things. Also know some servers magic which process any kind of data: users databases, millions torrents to rate, or save all your facebook photos.</p>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">Images</a>
+                    <ul class="dropdown images">
+                        <li>😹</li>
+                        <li>🐋</li>
+                        <li>👾</li>
+                        <li>🏂</li>
+                        <li>🏍</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Locations</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Barcelona</a></li>
+                        <li><a href="#">Amsterdam</a></li>
+                        <li><a href="#">Bangkok</a></li>
+                        <li><a href="#">Mexico</a></li>
+                        <li><a href="#">Los Angeles</a></li>
+                    </ul>
+                </li>
                 <li><a href="#">Maps</a></li>
             </ul>
         </nav>
@@ -38,5 +66,44 @@
                 <span>Ea vitae amet odit ullam molestias! Laborum suscipit dolorem sequi. Nostrum qui quis explicabo corporis, voluptatibus accusantium repellat dolorum recusandae cupiditate, aliquam cum aperiam tenetur dolores dolore! Aperiam, quod nisi!</span>
             </p>
         </article>
+        <script>
+            const triggers = document.querySelectorAll('nav > ul > li');
+            const background = document.querySelector('.dropdownBackground');
+            const nav = document.querySelector('nav');
+
+            triggers.forEach(li => {
+                li.addEventListener('mouseenter', navEnter);
+                li.addEventListener('mouseleave', navLeave);
+            });
+            function navEnter() {
+                this.classList.add('trigger-enter');
+                setTimeout(() => this.classList.add('trigger-enter-active'), 50);
+
+                const dropdown = this.querySelector('.dropdown');
+                if (!dropdown) return
+
+                background.classList.add('open');
+
+                const dropdownCoords = dropdown.getBoundingClientRect();
+                const navCoords = nav.getBoundingClientRect();
+                console.log(dropdownCoords, navCoords);
+
+                const stickyCords = {
+                    'width': dropdownCoords.width,
+                    'height': dropdownCoords.height,
+                    'top': dropdownCoords.top - navCoords.top,
+                    'left': dropdownCoords.left - navCoords.left,
+                }
+
+                background.style.setProperty('width', `${stickyCords.width}px`);
+                background.style.setProperty('height', `${stickyCords.height}px`);
+                background.style.setProperty('transform', `translate(${stickyCords.left}px, ${stickyCords.top}px)`);
+            }
+
+            function navLeave() {
+                this.classList.remove('trigger-enter', 'trigger-enter-active');
+                background.classList.remove('open');
+            }
+        </script>
     </body>
 </html>
