@@ -77,7 +77,7 @@
             });
             function navEnter() {
                 this.classList.add('trigger-enter');
-                setTimeout(() => this.classList.add('trigger-enter-active'), 50);
+                setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 50);
 
                 const dropdown = this.querySelector('.dropdown');
                 if (!dropdown) return
