@@ -1,0 +1,65 @@
+html {
+    font-size: 20px;
+    font-family:'helvetica neue';
+    background-color: #eee;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    height: 50vh;
+    background: url(forest.jpg) center no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+    header h1 {
+        color: white;
+        text-shadow: 3px 4px 0 black;
+        font-size: 7vw;
+    }
+
+nav {
+    width: 100%;
+    background: black;
+    line-height: 1em;
+    transition: all 0.5s;
+}
+    nav ul {
+        display: flex;
+        flex-flow: row nowrap;
+        margin: 0;
+        padding: 0;
+    }
+    nav li {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    nav li.logo {
+        background: white;
+        font-weight: 600;
+        font-size: 30px;
+        overflow: hidden;
+        transition: all .5s;
+    }
+    nav a {
+        color: white;
+        padding: 20px;
+        text-decoration: none;
+    }
+    nav li.logo a {
+        color: black;
+    }
+
+article {
+    max-width: 60%;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, .2);
+}
